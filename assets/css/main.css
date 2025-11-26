@@ -148,6 +148,8 @@ h6 {
   padding: 15px 0;
   transition: all 0.5s;
   z-index: 997;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+
 }
 
 .header .logo {
@@ -412,12 +414,21 @@ h6 {
 --------------------------------------------------------------*/
 .footer {
   color: var(--default-color);
-  background-color: var(--background-color);
+  background-color: #f5f7f9;
   font-size: 14px;
   text-align: center;
   padding: 30px 0;
   position: relative;
+  margin-top: 0 !important;
+  border-top: 1px solid rgba(0,0,0,0.08);
 }
+footer.footer {
+  background-color: #f4f4f6 !important; /* lys, varm grå */
+  border-top: 1px solid rgba(0,0,0,0.08); /* elegant skillelinje */
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
 
 .footer h3 {
   font-size: 36px;
@@ -432,6 +443,7 @@ h6 {
   font-style: italic;
   padding: 0;
   margin: 0 0 30px 0;
+  
 }
 
 .footer .social-links {
@@ -468,6 +480,7 @@ h6 {
   font-size: 13px;
   padding-top: 5px;
 }
+
 
 /*--------------------------------------------------------------
 # Preloader
@@ -517,7 +530,7 @@ h6 {
   background-color: var(--accent-color);
   width: 40px;
   height: 40px;
-  border-radius: 4px;
+  border-radius: 20px;
   transition: all 0.4s;
 }
 
@@ -649,12 +662,26 @@ section,
   justify-content: center;
 }
 
-.hero:before {
+/*.hero:before {
   content: "";
   background: color-mix(in srgb, var(--background-color), transparent 90%);
   position: absolute;
   inset: 0;
   z-index: 2;
+}*/
+
+
+.hero:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.05) 0%,     /* nesten ingen mørkning øverst */
+      rgba(0, 0, 0, 0.25) 40%,    /* gjør midten litt mørkere */
+      rgba(0, 0, 0, 0.55) 100%    /* mørkere nederst ved teksten */
+  );
 }
 
 .hero img {
@@ -670,6 +697,13 @@ section,
 .hero .container {
   position: relative;
   z-index: 3;
+  margin-top: 350px; /* Juster tallet (f.eks. 60–120px) til det ser riktig ut */
+  
+}
+@media (max-width: 640px) {
+  .hero .container {
+    margin-top: 400px;
+  }
 }
 
 .hero h2 {
@@ -1096,89 +1130,106 @@ section,
   background-color: var(--accent-color);
 }
 
-/*--------------------------------------------------------------
-# Contact Section
---------------------------------------------------------------*/
-.contact .info-item+.info-item {
-  margin-top: 40px;
+/* ---------------------------------
+   Kontaktseksjon – Mari-stil
+----------------------------------- */
+
+#contact.contact {
+  background: #ffffff;
+  padding: 80px 0;
+  text-align: left;
 }
 
-.contact .info-item i {
-  color: var(--accent-color);
-  background: color-mix(in srgb, var(--accent-color), transparent 92%);
-  font-size: 20px;
-  width: 44px;
-  height: 44px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50px;
-  transition: all 0.3s ease-in-out;
-  margin-right: 15px;
+.contact-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-.contact .info-item h3 {
-  padding: 0;
-  font-size: 18px;
+.contact-title {
+  text-align: left;
+  font-size: 34px;
   font-weight: 700;
-  margin-bottom: 5px;
+  margin-bottom: 12px;
+  margin-left: 0;
 }
 
-.contact .info-item p {
-  padding: 0;
-  margin-bottom: 0;
-  font-size: 14px;
+.contact-intro {
+  text-align: left;
+  max-width: 640px;
+  margin: 0 auto 50px;
+  color: rgba(0, 0, 0, 0.55);
+  font-size: 17px;
+  line-height: 1.6;
+  margin-left: 0;
 }
 
-.contact .info-item:hover i {
-  background: var(--accent-color);
-  color: var(--contrast-color);
+/* Grid layout */
+.contact-grid {
+  display: grid;
+  gap: 50px;
 }
 
-.contact .php-email-form {
-  height: 100%;
+@media (min-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+  }
 }
 
-.contact .php-email-form input[type=text],
-.contact .php-email-form input[type=email],
-.contact .php-email-form textarea {
-  font-size: 14px;
-  padding: 10px 15px;
-  box-shadow: none;
-  border-radius: 0;
-  color: var(--default-color);
-  background-color: color-mix(in srgb, var(--background-color), transparent 50%);
-  border-color: color-mix(in srgb, var(--default-color), transparent 80%);
+/* Kontaktinfo */
+.contact-info h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 20px;
 }
 
-.contact .php-email-form input[type=text]:focus,
-.contact .php-email-form input[type=email]:focus,
-.contact .php-email-form textarea:focus {
+.contact-info p {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.contact-info a {
+  color: var(--accent-color);
+  text-decoration: none;
+}
+
+/* Form styling */
+.php-email-form input,
+.php-email-form textarea {
+  background: #f7f7f7;
+  border: 1px solid #ddd;
+  padding: 12px 14px;
+  width: 100%;
+  border-radius: 4px;
+  font-size: 15px;
+  color: #444;
+}
+
+.php-email-form input:focus,
+.php-email-form textarea:focus {
   border-color: var(--accent-color);
+  outline: none;
 }
 
-.contact .php-email-form input[type=text]::placeholder,
-.contact .php-email-form input[type=email]::placeholder,
-.contact .php-email-form textarea::placeholder {
-  color: color-mix(in srgb, var(--default-color), transparent 70%);
-}
-
-.contact .php-email-form button[type=submit] {
-  color: var(--contrast-color);
+.php-email-form button[type=submit] {
   background: var(--accent-color);
-  border: 0;
-  padding: 10px 30px;
-  transition: 0.4s;
-  border-radius: 50px;
+  border: none;
+  color: #fff;
+  padding: 12px 30px;
+  border-radius: 30px;
+  font-size: 16px;
+  transition: 0.3s;
 }
 
-.contact .php-email-form button[type=submit]:hover {
-  background: color-mix(in srgb, var(--accent-color), transparent 25%);
+.php-email-form button[type=submit]:hover {
+  background: color-mix(in srgb, var(--accent-color), transparent 20%);
 }
 
 /*--------------------------------------------------------------
 # Portfolio Details Section
 --------------------------------------------------------------*/
+
+/* Slider (om du bruker den senere) */
 .portfolio-details .portfolio-details-slider img {
   width: 100%;
 }
@@ -1199,38 +1250,23 @@ section,
   background-color: var(--accent-color);
 }
 
-.portfolio-details .portfolio-info {
-  background-color: var(--surface-color);
-  padding: 30px;
-  box-shadow: 0px 0 30px rgba(0, 0, 0, 0.1);
+/* Fjern intern padding på slidercontaineren */
+.portfolio-details .portfolio-details-slider {
+  padding-left: 0;
+  padding-right: 0;
 }
 
-.portfolio-details .portfolio-info h3 {
-  font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 20px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid color-mix(in srgb, var(--default-color), transparent 85%);
-}
-
+/* Info-liste (hvis du bruker den) */
 .portfolio-details .portfolio-info ul {
   list-style: none;
   padding: 0;
   font-size: 15px;
 }
 
-.portfolio-details .portfolio-info ul li+li {
-  margin-top: 10px;
-}
-
+/* Generell tekst i beskrivelse */
 .portfolio-details .portfolio-description {
-  padding-top: 30px;
-}
-
-.portfolio-details .portfolio-description h2 {
-  font-size: 26px;
-  font-weight: 700;
-  margin-bottom: 20px;
+  padding-top: 0;
+  margin-top: 0;
 }
 
 .portfolio-details .portfolio-description p {
@@ -1238,71 +1274,142 @@ section,
   color: color-mix(in srgb, var(--default-color), transparent 30%);
 }
 
+/* Større sidemarg på mobil for tekst */
+@media (max-width: 768px) {
+  .portfolio-details .portfolio-description,
+  .portfolio-details .portfolio-info,
+  .content-wrapper {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+/* H1 på portfolio-detaljsiden: som seksjonstittel på index (med rosa strek) */
+.portfolio-details h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  position: relative;
+  color: var(--heading-color);
+}
+
+.portfolio-details h1::after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: var(--accent-color);
+  left: 0;
+  bottom: 0;
+}
+
+/* H2 på portfolio-detaljsiden: som "små seksjonstitler" */
+.portfolio-details h2 {
+  font-family: var(--default-font); /* Roboto */
+  font-weight: 500;
+  font-size: 22px;
+  margin-top: 10px;
+  margin-bottom: 12px;
+  color: var(--heading-color);
+  line-height: 1.3;
+}
+
+/* Skillelinje under tittel/introtekst */
+.portfolio-details .project-header {
+  border-bottom: 1px solid color-mix(in srgb, var(--default-color), transparent 70%);
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+}
+
+/* Sørg for at selve seksjonen ikke dytter alt ned */
+#portfolio-details,
+#portfolio-details.section {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* Hero-bilde – felles base */
+.project-hero-image {
+  margin-bottom: 24px;
+}
+
+.project-hero-image img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* Desktop & tablet (>= 769px) --------------------- */
+@media (min-width: 769px) {
+
+  .project-hero-image {
+    margin-top: 24px;        /* litt luft mellom meny og bilde */
+    margin-bottom: 24px;     /* fin luft ned til tittelen */
+  }
+
+  .project-hero-image img {
+    height: 380px;           /* juster 320–420px etter smak */
+    border-radius: 10px;     /* runde hjørner på desktop */
+  }
+
+  .project-header {
+    margin-top: 0;
+    margin-bottom: 24px;     /* luft mellom intro og videre tekst */
+  }
+
+  .portfolio-details .portfolio-description {
+    padding-top: 0;
+    margin-top: 0;
+  }
+}
+
+/* Mobil (< 769px) ------------------------------- */
+@media (max-width: 768px) {
+
+  /* Hele seksjonen skal ikke dytte ting ned */
+  #portfolio-details,
+  #portfolio-details.section {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .project-hero-image {
+    width: 100vw;            /* full bredde */
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+
+    margin-top: 0;           /* helt opp til menylinja */
+    margin-bottom: 16px;     /* liten, pen luft under bildet */
+  }
+
+  .project-hero-image img {
+    height: 240px;           /* høyde på mobil */
+    border-radius: 0;        /* ingen hjørner når utfallende */
+  }
+
+  .project-header {
+    margin-top: 0;
+    margin-bottom: 20px;     /* luft mellom intro og resten */
+  }
+
+  .project-header h1 {
+    margin-top: 0;
+  }
+
+  .portfolio-details .portfolio-description {
+    padding-top: 0;
+    margin-top: 0;
+  }
+}
+
 /*--------------------------------------------------------------
 # Service Details Section
 --------------------------------------------------------------*/
-.service-details .services-list {
-  background-color: var(--surface-color);
-  padding: 10px 30px;
-  border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
-  margin-bottom: 20px;
-}
-
-.service-details .services-list a {
-  display: block;
-  line-height: 1;
-  padding: 8px 0 8px 15px;
-  border-left: 3px solid color-mix(in srgb, var(--default-color), transparent 70%);
-  margin: 20px 0;
-  color: color-mix(in srgb, var(--default-color), transparent 20%);
-  transition: 0.3s;
-}
-
-.service-details .services-list a.active {
-  color: var(--heading-color);
-  font-weight: 700;
-  border-color: var(--accent-color);
-}
-
-.service-details .services-list a:hover {
-  border-color: var(--accent-color);
-}
-
-.service-details .services-img {
-  margin-bottom: 20px;
-}
-
-.service-details h3 {
-  font-size: 26px;
-  font-weight: 700;
-}
-
-.service-details h4 {
-  font-size: 20px;
-  font-weight: 700;
-}
-
-.service-details p {
-  font-size: 15px;
-}
-
-.service-details ul {
-  list-style: none;
-  padding: 0;
-  font-size: 15px;
-}
-
-.service-details ul li {
-  padding: 5px 0;
-  display: flex;
-  align-items: center;
-}
-
-.service-details ul i {
-  font-size: 20px;
-  margin-right: 8px;
-  color: var(--accent-color);
-}
 
 /*--------------------------------------------------------------
 # Starter Section Section
@@ -1310,3 +1417,758 @@ section,
 .starter-section {
   /* Add your styles here */
 }
+
+
+
+
+/*--------------------------------------------------------------
+# Bilde-grid
+--------------------------------------------------------------*/
+
+.portfolio-image-grid {
+  display: grid;
+  gap: 20px; /* avstand mellom bildene */
+}
+
+/* 1 bilde = 1 kolonne */
+/* 2 bilder = 2 kolonner */
+/* 3 bilder = 3 kolonner */
+.portfolio-image-grid.grid-1 {
+  grid-template-columns: 1fr;
+}
+
+.portfolio-image-grid.grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.portfolio-image-grid.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.portfolio-image-grid img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  display: block;
+}
+
+/* På mobil faller alt automatisk til 1 kolonne */
+@media (max-width: 1000px) {
+  .portfolio-image-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* --------------------------------------------------------------
+   Fiks mellomrom mellom bildene i galleriet
+-------------------------------------------------------------- */
+
+.portfolio-image-grid {
+  gap: 20px !important;   /* Gir mellomrom mellom bildene */
+  margin-top: 20px;       /* Litt luft over første bilde i gridet */
+  margin-bottom: 40px;    /* Luft under hele griden */
+}
+
+.portfolio-image-grid img {
+  border-radius: 10px;    /* eller 6px hvis du vil */
+  display: block;
+}
+
+
+/*--------------------------------------------------------------
+# Content wrapper for bredde
+--------------------------------------------------------------*/
+
+@media (min-width: 768px) {
+  .content-wrapper {
+    max-width: 1024px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+}
+
+/*--------------------------------------------------------------
+# Tilbake-knapp
+--------------------------------------------------------------*/
+
+.btn-back-to-portfolio {
+  display: inline-block;
+  padding: 10px 24px;
+  font-size: 15px;
+  border-radius: 50px;
+  border: 2px solid var(--accent-color);
+  color: var(--accent-color);
+  background: transparent;
+  text-decoration: none;
+  transition: 0.3s;
+  font-weight: 500;
+}
+
+.btn-back-to-portfolio:hover {
+  background: var(--accent-color);
+  color: var(--contrast-color);
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+
+/*--------------------------------------------------------------
+# Flere arbeider-seksjon
+--------------------------------------------------------------*/
+
+
+
+.more-projects-title {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+/* GRID: alltid 3 kolonner */
+.more-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px; /* grunnavstand mellom kortene */
+}
+
+/* Kortene */
+.more-project-card {
+  display: block;
+  text-decoration: none;
+  color: var(--default-color);
+  transition: transform 0.2s ease;
+}
+
+/* Bildedel – kvadratiske kort */
+.more-project-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #f3f4f6;
+}
+
+.more-project-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+/* Tekst under bildet */
+.more-project-card h3 {
+  font-size: 14px;
+  margin-top: 6px;
+  margin-bottom: 2px;
+  font-weight: 600;
+  color: var(--heading-color);
+}
+
+.more-project-card p {
+  font-size: 12px;
+  margin: 0;
+  color: color-mix(in srgb, var(--default-color), transparent 20%);
+}
+
+/* Mindre luft og litt enklere på helt små mobiler */
+@media (max-width: 480px) {
+  .more-projects-grid {
+    gap: 6px;
+  }
+
+  .more-project-card h3 {
+    font-size: 13px;
+  }
+
+  .more-project-card p {
+    display: none; /* skjul beskrivelsen på de minste skjermene */
+  }
+}
+
+/* Litt hover-effekt på større skjermer */
+@media (min-width: 768px) {
+  .more-project-card:hover {
+    transform: translateY(-3px);
+  }
+
+  .more-project-card:hover img {
+    transform: scale(1.04);
+  }
+}
+
+/*--------------------------------------------------------------
+# Justering nederst på portfolio-detaljsiden
+--------------------------------------------------------------*/
+
+#portfolio-details {
+  padding-bottom: 0;
+}
+
+
+/*--------------------------------------------------------------
+# Flere prosjekter – Ryddet og optimalisert
+--------------------------------------------------------------*/
+
+.more-projects-title {
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* GRID: alltid 3 i bredden, men med kontrollert størrelse */
+.more-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px; /* mer avstand på desktop */
+}
+
+.more-project-card {
+  display: block;
+  text-decoration: none;
+  color: var(--default-color);
+  transition: transform 0.2s ease;
+}
+
+/* kvadrat-ish kort */
+.more-project-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1/1; 
+  overflow: hidden;
+  border-radius: 10px;
+  background: #f3f4f6;
+}
+
+.more-project-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.more-project-card h3 {
+  font-size: 15px;
+  margin-top: 8px;
+  margin-bottom: 2px;
+  font-weight: 600;
+}
+
+.more-project-card p {
+  font-size: 13px;
+  margin: 0;
+  color: rgba(0,0,0,0.55);
+}
+
+/* Hover på større skjermer */
+@media (min-width: 768px) {
+  .more-project-card:hover {
+    transform: translateY(-3px);
+  }
+  .more-project-card:hover img {
+    transform: scale(1.04);
+  }
+}
+
+/* --------------------------------------------------------------
+   MOBIL – mindre kort + luft på sidene
+-------------------------------------------------------------- */
+
+@media (max-width: 767px) {
+
+ 
+
+  .more-projects-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;  /* mindre avstand */
+  }
+
+  .more-project-image-wrapper {
+    aspect-ratio: 1/1;   /* helt kvadratisk */
+  }
+
+  .more-project-card h3 {
+    font-size: 13px;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .more-project-card p {
+    display: none; /* rydder mobil */
+  }
+}
+
+/* --------------------------------------------------------------
+   STORE SKJERMER – litt mindre kort, mer luft
+-------------------------------------------------------------- */
+
+
+  .more-projects-grid {
+    gap: 20px;  /* litt større luft på desktop */
+  }
+}
+
+.btn-back-to-portfolio {
+  margin-top: 50px; /* juster fritt: 20–60px */
+}
+h3 {
+  font-family: var(--default-font); /* samme som brødtekst */
+  font-weight: 700; /* bold */
+  font-style: normal;
+  font-size: 1.375rem; /* 22px / 16px */
+}
+
+.header .logo .sitename {
+  font-size: 30px;       /* samme som før */
+  font-weight: 700;      /* samme som før */
+  color: var(--heading-color);
+  margin: 0;
+  line-height: 1;
+  font-family: var(--heading-font); /* Domine – samme som før */
+}
+
+/* Fjern topp-padding på hele seksjonen */
+#portfolio-details {
+  padding-top: 0 !important;
+}
+
+/* Desktop */
+@media (min-width: 769px) {
+
+  .project-hero-image {
+    margin-top: 20px;            /* litt luft over bildet på desktop */
+    margin-bottom: 20px;         /* pen, moderat luft under */
+  }
+
+  .project-hero-image img {
+    width: 100%;
+    height: 380px;               /* juster 320–420px */
+    object-fit: cover;
+    border-radius: 10px;         /* runde hjørner på desktop */
+    display: block;
+  }
+
+  /* Fjern ekstra padding fra tekstblokk */
+  .portfolio-details .portfolio-description {
+    padding-top: 0 !important;
+  }
+}
+
+/* Mobil */
+@media (max-width: 768px) {
+
+  .project-hero-image {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+
+    margin-top: 0;               /* helt opp til header */
+    margin-bottom: 16px;         /* liten fin luft under bildet */
+  }
+
+  .project-hero-image img {
+    height: 240px;               /* fin mobilhøyde */
+    object-fit: cover;
+    border-radius: 0;            /* ingen runde hjørner når full-screen */
+  }
+
+  /* Fjern padding på tekst */
+  .portfolio-details .portfolio-description {
+    padding-top: 0 !important;
+  }
+}
+/* MOBIL – stram opp luft mellom bilde og tittel på prosjektsiden */
+@media (max-width: 768px) {
+
+  /* Fjern topp/bunn-padding på selve seksjonen */
+  section#portfolio-details {
+    padding-top: 0 !important;
+    padding-bottom: 20px !important; /* litt luft helt nederst på siden */
+  }
+
+  /* Fjern vertikal gutter fra Bootstrap sin gy-4 på denne raden */
+  #portfolio-details .gy-4 {
+    --bs-gutter-y: 0 !important;
+  }
+
+  /* Kontroller luft rundt bildet */
+  .project-hero-image {
+    margin-top: 0 !important;
+    margin-bottom: 12px !important;   /* liten, fin luft under bildet */
+  }
+
+  /* Fjern ekstra padding/margin på tekstblokken */
+  .portfolio-details .portfolio-description {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  /* Sørg for at H1 ikke har toppmargin */
+  #portfolio-details h1 {
+    margin-top: 0 !important;
+  }
+}
+@media (min-width: 769px) {
+
+  .project-hero-image {
+    margin-top: 20px !important;    /* litt luft over bildet */
+    margin-bottom: 20px !important; /* moderat luft til teksten */
+  }
+
+  .portfolio-details .portfolio-description {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+}
+
+/* MOBIL: stram opp mellomrom mellom bilde og tittel på prosjektsiden */
+@media (max-width: 768px) {
+
+  /* Ingen ekstra padding på selve seksjonen */
+  #portfolio-details {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* Hero-bildet: full bredde, ingen ekstra luft over, litt under */
+  .project-hero-image {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+
+    margin-top: 0 !important;      /* rett opp til menyen */
+    margin-bottom: 8px !important; /* liten, men tydelig luft under bildet */
+  }
+
+  .project-hero-image img {
+    height: 240px;
+    object-fit: cover;
+    border-radius: 0;              /* ingen hjørner når det går kant-til-kant */
+    display: block;
+  }
+
+  /* Tittelseksjonen rett under bildet */
+  .project-header {
+    margin-top: 0 !important;      /* fjern ekstra topp-luft */
+    margin-bottom: 16px;           /* litt luft ned til brødtekst */
+  }
+
+  .project-header h1 {
+    margin-top: 0 !important;      /* noen browser-stiler gir toppmargin – vekk med den */
+  }
+
+  /* Tekstblokka rett etterpå skal ikke dytte ting ned */
+  .portfolio-details .portfolio-description {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+}
+
+
+/* --------------------------
+   ENTUR-CASE: HERO + SPACING
+   -------------------------- */
+
+/* Fjern standard topp-padding for denne seksjonen */
+#portfolio-details.section {
+  padding-top: 0;
+}
+
+/* Felles for begge: tekstblokken skal ikke ha ekstra padding på toppen */
+.portfolio-details .portfolio-description {
+  padding-top: 0;
+  margin-top: 0;
+}
+
+/* Felles: project-header skal ikke ha toppmargin */
+#portfolio-details .project-header {
+  margin-top: 0;
+}
+
+/* Felles: H1 skal ikke ha toppmargin */
+#portfolio-details .project-header h1 {
+  margin-top: 0;
+}
+
+/* Desktop & tablet (>= 769px) --------------------- */
+@media (min-width: 769px) {
+
+  .project-hero-image {
+    margin-top: 24px;        /* litt luft mellom meny og bilde */
+    margin-bottom: 24px;     /* fin luft ned til tittelen */
+  }
+
+  .project-hero-image img {
+    width: 100%;
+    height: 380px;           /* juster 320–420px etter smak */
+    object-fit: cover;
+    border-radius: 10px;     /* runde hjørner på desktop */
+    display: block;
+  }
+
+  .project-header {
+    margin-bottom: 24px;     /* luft mellom intro og videre tekst */
+  }
+}
+
+/* Mobil (< 769px) ------------------------------- */
+@media (max-width: 768px) {
+
+  /* Hele seksjonen skal ikke dytte alt ned */
+  #portfolio-details.section {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .project-hero-image {
+    width: 100vw;            /* fullbredde */
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+
+    margin-top: 0;           /* helt opp til menylinja */
+    margin-bottom: 16px;     /* liten, pen luft under bildet */
+  }
+
+  .project-hero-image img {
+    height: 240px;           /* høyde på mobil */
+    object-fit: cover;
+    border-radius: 0;        /* ingen hjørner når utfallende */
+    display: block;
+  }
+
+  .project-header {
+    margin-top: 0;
+    margin-bottom: 20px;     /* luft mellom intro og resten */
+  }
+
+  .project-header h1 {
+    margin-top: 0;
+  }
+
+  .portfolio-details .portfolio-description {
+    padding-top: 0;
+    margin-top: 0;
+  }
+}
+/* --------------------------------------------------------------
+   Fiks: Flere arbeider-seksjon skal være full bredde
+-------------------------------------------------------------- */
+
+/*--------------------------------------------------------------
+# Flere arbeider – fullbredde seksjon
+--------------------------------------------------------------*/
+
+.more-projects {
+  background: #f7f7f7;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  padding: 50px 0 70px;
+  margin-top: 60px;
+
+  /* full bredde, uansett container */
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  width: 100vw;
+}
+
+.more-projects .content-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;  /* litt luft inni seksjonen */
+}
+
+.more-projects-title {
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.more-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.more-project-card {
+  display: block;
+  text-decoration: none;
+  color: var(--default-color);
+  transition: transform 0.2s ease;
+}
+
+.more-project-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #f3f4f6;
+}
+
+.more-project-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.more-project-card h3 {
+  font-size: 15px;
+  margin-top: 8px;
+  margin-bottom: 2px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.more-project-card p {
+  font-size: 13px;
+  margin: 0;
+  color: rgba(0,0,0,0.55);
+}
+
+/* Hover på større skjermer */
+@media (min-width: 768px) {
+  .more-project-card:hover {
+    transform: translateY(-3px);
+  }
+
+  .more-project-card:hover img {
+    transform: scale(1.04);
+  }
+}
+
+/* Mobil – litt mindre luft og kompakt tekst */
+@media (max-width: 768px) {
+  .more-projects .content-wrapper {
+    padding: 0 16px;
+  }
+
+  .more-projects-grid {
+    gap: 10px;
+  }
+
+  .more-project-card h3 {
+    font-size: 13px;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .more-project-card p {
+    display: none;
+  }
+}
+/* Ekstra luft over "Tilbake til alle arbeider"-knappen */
+.more-projects .btn-back-to-portfolio {
+  margin-top: 32px;   /* prøv 32px – øk til 40px hvis du vil ha enda mer luft */
+}
+/* Fjern hvitt mellomrom under Flere arbeider-seksjonen */
+section#portfolio-details {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+/* --------------------------------------------------------------
+   MOBIL: Fiks hero slik at all tekst er synlig
+-------------------------------------------------------------- */
+
+@media (max-width: 768px) {
+
+  .hero {
+    min-height: 90vh;              /* fyller skjermen fint */
+    padding: 120px 0 40px 0;       /* litt luft nederst til teksten */
+    display: flex;
+    align-items: flex-end;         /* legg teksten nederst i bildet, men innenfor */
+  }
+
+  .hero .container {
+    margin-top: 0 !important;      /* overstyr 350/400px margin-top */
+    padding: 0 20px;               /* litt side-luft til teksten */
+  }
+}
+
+/* Ekstra justering for veldig smale skjermer */
+@media (max-width: 640px) {
+
+  .hero h2 {
+    font-size: 40px;
+    line-height: 1.1;
+  }
+
+  .hero p {
+    font-size: 18px;
+  }
+}
+
+/* --------------------------------------------------------------
+   SMALERE BREDDE PÅ PORTFOLIO-DETALJ-SIDE
+-------------------------------------------------------------- */
+
+/* Hovedbredde på tekstinnhold */
+#portfolio-details .container {
+  max-width: 880px;     /* juster 760–960px etter smak */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* Gjør kun hero-bildet fullbredde – ikke resten */
+#portfolio-details .project-hero-image {
+  max-width: 100vw;
+}
+
+/* Juster innholdselementer som bruker content-wrapper */
+#portfolio-details .content-wrapper {
+  max-width: 880px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Mobil – la alt bruke standard padding */
+@media (max-width: 768px) {
+  #portfolio-details .container,
+  #portfolio-details .content-wrapper {
+    max-width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+/* --------------------------------------------------------------
+   Portfolio-detaljside: H3 = brødtekststørrelse + bold
+-------------------------------------------------------------- */
+
+#portfolio-details h3 {
+  font-family: var(--default-font); /* samme som brødtekst */
+  font-weight: 700;                 /* bold */
+  font-size: 1rem;                  /* 16px – juster hvis ønskelig */
+  line-height: 1.5;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  color: var(--heading-color);
+}
+/* --------------------------------------------------------------
+   "Hvorfor jeg tar med dette" – boks (lysere & mer subtil)
+-------------------------------------------------------------- */
+
+.why-portfolio-box {
+  background: #f7f7f8;                /* litt lysere grå */
+  border: 1px solid rgba(0,0,0,0.04); /* helt subtil ramme */
+  padding: 24px 28px;
+  border-radius: 12px;
+  margin-top: 40px;
+  margin-bottom: 60px;
+}
+
+.why-portfolio-box h3 {
+  font-size: 1rem;                    /* samme som brødtekst bold */
+  font-weight: 600;
+  font-style: italic;
