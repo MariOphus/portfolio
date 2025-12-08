@@ -2172,3 +2172,78 @@ section#portfolio-details {
   font-size: 1rem;                    /* samme som brødtekst bold */
   font-weight: 600;
   font-style: italic;
+
+
+.case-video .project-video {
+  width: 100%;
+  border-radius: 6px;
+  margin-top: 20px;
+}
+
+.autoplay-video-section {
+  padding: 60px 0;
+}
+
+.autoplay-video-section h2 {
+  margin-bottom: 20px;
+}
+
+.autoplay-video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 6px;
+}
+.triple-banners-section {
+  padding: 60px 0;
+}
+
+.triple-banners-section h2 {
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+.triple-banners-section {
+  padding: 60px 0;
+}
+
+.triple-banners-section h2 {
+  margin-bottom: 30px;
+}
+
+/* Rad med tre bannere */
+.triple-banners-section .banner-row {
+  display: flex;
+  gap: 20px;
+}
+
+/* Hvert banner tar like mye plass i bredden */
+.triple-banners-section .banner-item {
+  flex: 1 1 0;
+}
+
+/* Fast format på banneret (16:9) */
+.triple-banners-section .banner-item-inner {
+  position: relative;
+  padding-top: 56.25%; /* 16/9 */
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+/* Video/iframe fyller rammen, klippes pent */
+.triple-banners-section .banner-item-inner video,
+.triple-banners-section .banner-item-inner iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* På små skjermer kan de godt legge seg under hverandre */
+@media (max-width: 768px) {
+  .triple-banners-section .banner-row {
+    flex-direction: column;
+  }
+}
